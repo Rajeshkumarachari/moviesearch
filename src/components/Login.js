@@ -1,12 +1,29 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidData } from "../Utils/validate";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const name = useRef("Rajesh");
+
+  const handleButtonClick = () => {
+    const message = checkValidData(
+      email.current.value,
+      password.current.value,
+      name.current.value
+    );
+    //console.log(email.current.value, password.current.value);
+    setErrorMessage(message);
+  };
 
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
+
   return (
     <div>
       <Header />
@@ -16,12 +33,16 @@ const Login = () => {
           alt="background-banner"
         />
       </div>
-      <form className=" w-4/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0  text-white bg-opacity-80 rounded-md">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className=" w-4/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0  text-white bg-opacity-80 rounded-md"
+      >
         <h1 className=" font-bold text-3xl py-4  px-2">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
           <input
+            ref={name}
             type="text"
             placeholder="Enter your Name"
             className=" p-4 my-4 w-full rounded-md bg-[#333] text-lg "
@@ -29,16 +50,22 @@ const Login = () => {
         )}
 
         <input
+          ref={email}
           type="text"
           placeholder="Email or phone number"
           className=" p-4 my-4 w-full rounded-md bg-[#333] text-lg "
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className=" p-4 my-4 w-full rounded-md  bg-[#333] text-lg "
         />
-        <button className=" p-4 my-4 bg-[#e50914] w-full rounded-md text-lg font-semibold ">
+        <p className=" text-[#e87c03] px-2  ">{errorMessage} </p>
+        <button
+          className=" p-4 my-4 bg-[#e50914] w-full rounded-md text-lg font-semibold "
+          onClick={handleButtonClick}
+        >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <div className=" flex justify-between">
