@@ -1,22 +1,46 @@
-import React from "react";
-import { NETFLIX_LOGO_HOME, USER_ACCOUNT_ICON } from "../Utils/constant";
+import React, { useEffect } from "react";
+import { NETFLIX_LOGO_HOME } from "../Utils/constant";
 import { signOut } from "firebase/auth";
 import { auth } from "../Utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { addUser, removeUser } from "../Utils/userSlice";
 
 const Header = () => {
-  const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((store) => store.user);
+
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
         navigate("/error");
       });
   };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return (
     <div className="absolute w-screen z-10 px-8 py-2 bg-gradient-to-b from-black flex justify-between">
       <img
@@ -30,7 +54,7 @@ const Header = () => {
           <img
             className=" my-5 mx-3 w-10 h-10 rounded-md cursor-pointer"
             src={user?.photoURL}
-            alt="usersinged_icon"
+            alt="user_singed_icon"
           />
           <button
             onClick={handleSignOut}

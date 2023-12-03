@@ -7,7 +7,6 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { NETFLIX_BACKGROUND_IMG, USER_ACCOUNT_ICON } from "../Utils/constant";
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/userSlice";
@@ -18,7 +17,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const email = useRef(null);
   const password = useRef(null);
-  const navigate = useNavigate();
 
   const name = useRef("rajesh");
 
@@ -28,7 +26,6 @@ const Login = () => {
       password.current.value,
       name.current.value
     );
-    //console.log(email.current.value, password.current.value);
     setErrorMessage(message);
     if (message) return;
     if (!isSignInForm) {
@@ -54,13 +51,10 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-              navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
             });
-
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -76,8 +70,6 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
