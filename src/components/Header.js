@@ -58,7 +58,7 @@ const Header = () => {
           />
           <button
             onClick={handleSignOut}
-            className=" bg-[#e50914] w-24 font-semibold h-10 text-white my-5 rounded-md hover:bg-[#92343b]   "
+            className=" bg-[#e50914] w-24 mr-20 font-semibold h-10 text-white my-5 rounded-md hover:bg-[#92343b]   "
           >
             Sign Out
           </button>
