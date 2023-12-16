@@ -4,7 +4,9 @@ import MovieCard from "./MovieCard";
 const MovieList = ({ title, movies }) => {
   return (
     <div className="px-6 ">
-      <h1 className=" text-3xl font-medium text-gray-400 py-3 ">{title} </h1>
+      <h1 className=" text-xl md:text-3xl font-medium text-gray-400 py-3 ">
+        {title}{" "}
+      </h1>
       <div className=" flex overflow-x-auto no-scroll  ">
         <div className=" flex ">
           {movies &&
