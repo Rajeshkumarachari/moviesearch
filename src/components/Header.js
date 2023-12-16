@@ -53,7 +53,7 @@ const Header = () => {
     dispatch(changeLanguage(e.target.value));
   };
   return (
-    <div className="absolute w-screen z-10 px-8 py-2 bg-gradient-to-b from-black flex justify-between">
+    <div className=" fixed w-screen z-10 px-8 py-2 bg-gradient-to-b from-black flex justify-between">
       <img
         className=" w-52  cursor-pointer"
         src={NETFLIX_LOGO_HOME}

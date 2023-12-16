@@ -11,8 +11,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NDkzYjAyMTI5Njc5MDE5ODhlMGU3YTU0N2I5NmQ0YiIsInN1YiI6IjY1NDcxZTBhOWNjNjdiMDExY2VmNjkwYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KZWuz4VhRfR2L4mfnIRl5GqsWisP74ro82o4nqJq75Y",
+    Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
   },
 };
 
@@ -44,3 +43,5 @@ export const SUPPORTED_LANGUAGES = [
     name: "Kannada",
   },
 ];
+
+export const OPEN_KEY = process.env.REACT_APP_OPEN_KEY;
