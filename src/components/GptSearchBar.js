@@ -39,7 +39,7 @@ const GptSearchBar = () => {
 
     const tmdbResults = await Promise.all(promiseArray);
 
-    console.log(tmdbResults);
+    //console.log(tmdbResults);
 
     dispatch(
       addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults })
@@ -54,13 +54,13 @@ const GptSearchBar = () => {
       >
         <input
           ref={searchText}
-          className=" p-4 m-4 col-span-9 text-xl  rounded-md   "
+          className=" p-3 md:p-4 m-2 col-span-9 text-sm md:text-xl  rounded-md   "
           type="text"
           placeholder={lang[lanKey].gptSearchPlaceholder}
         />
         <button
           onClick={handleGptSearchClick}
-          className=" text-white px-4 py-2 m-4 col-span-3 rounded-md text-lg bg-lime-600"
+          className=" text-white px-2 md:px-4 py-2 m-4 col-span-3 rounded-md text-md md:text-sm bg-lime-600"
         >
           {lang[lanKey].search}
         </button>
