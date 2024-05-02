@@ -13,3 +13,5 @@
 Tailwind install
 
 # Features
+-Login and Sign Up functionality
+-Trending video trailer is playing on the homepage
